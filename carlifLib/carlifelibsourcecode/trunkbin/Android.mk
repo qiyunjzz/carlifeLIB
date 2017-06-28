@@ -1,0 +1,304 @@
+
+#*************************************************************#
+#company: nfore
+#Dep. : SHENZHEN	RD
+#Author: sunny.xia
+#Date	:	2017/03/07
+#*************************************************************#
+LOCAL_PATH:= $(call my-dir)
+
+SRCROOT					= $(TOP)/ external/carlifelibsourcecode/trunk 
+OBJDIR					= $(BUILDROOT)/obj
+# Includes
+INCLUDES				+= $(SRCROOT)/core
+INCLUDES				+= $(SRCROOT)/libwrapper
+INCLUDES				+= $(SRCROOT)/modules
+INCLUDES				+= $(SRCROOT)/protobuf/cc/src
+INCLUDES				+= $(SRCROOT)/protobuf/proto
+INCLUDES				+= $(SRCROOT)/utility
+
+#sunnyxia-20170310-add
+INCLUDES				+= $(TOP)/external/protobuf
+COMMONFLAGS		+= -D_GNU_SOURCE
+COMMONFLAGS		+= -DCFCOMPAT_NOTIFICATIONS_ENABLED=0
+COMMONFLAGS		+= -DDEBUG_EXPORT_ERROR_STRINGS=1
+COMMONFLAGS		+= -DFRAMEWORK_STYLE_INCLUDES=0
+COMMONFLAGS		+= -DTARGET_HAS_NATIVE_INT128=0
+COMMONFLAGS		+= -DTARGET_NEEDS_NATURAL_ALIGNMENT=1
+COMMONFLAGS		+= -DTARGET_OS_ANDROID=1
+COMMONFLAGS		+= -DTARGET_OS_LINUX=1
+COMMONFLAGS		+= -DTARGET_CPU_ARM=1
+
+
+LOCAL_SRC_ALL_FILES:= \
+	core/CTranRecvPackageProcess.cc	\
+	libwrapper/CCarLifeLib.cc	\
+	modules/CCmdChannelModule.cc	\
+	modules/CConnectionSetupModule.cc	\
+	modules/CCtrlChannelModule.cc	\
+	modules/CMediaChannelModule.cc	\
+	modules/CTTSChannelModule.cc	\
+	modules/CVideoChannelModule.cc	\
+	modules/CVRChannelModule.cc	\
+	utility/CCarLifeLog.cc	\
+	utility/CConnectManager.cc	\
+	utility/CSocketConnector.cc	\
+	utility/CVirtualShell.cc	\
+	utility/socket.cc	\
+	utility/socketv6.cc	\
+	protobuf/cc/src/CarlifeAccelerationProto.pb.cc	\
+	protobuf/cc/src/CarlifeAuthenRequestProto.pb.cc	\
+	protobuf/cc/src/CarlifeAuthenResponseProto.pb.cc	\
+	protobuf/cc/src/CarlifeAuthenResultProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTHfpConnectionProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTHfpIndicationProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTHfpRequestProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTHfpResponseProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTHfpStatusRequestProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTHfpStatusResponseProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTIdentifyResultIndProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTPairInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTStartIdentifyReqProto.pb.cc	\
+	protobuf/cc/src/CarlifeBTStartPairReqProto.pb.cc	\
+	protobuf/cc/src/CarlifeCallRecordsListProto.pb.cc	\
+	protobuf/cc/src/CarlifeCallRecordsProto.pb.cc	\
+	protobuf/cc/src/CarlifeCarGpsProto.pb.cc	\
+	protobuf/cc/src/CarlifeCarHardKeyCodeProto.pb.cc	\
+	protobuf/cc/src/CarlifeCarSpeedProto.pb.cc	\
+	protobuf/cc/src/CarlifeConnectExceptionProto.pb.cc	\
+	protobuf/cc/src/CarlifeContactsListProto.pb.cc	\
+	protobuf/cc/src/CarlifeContactsProto.pb.cc	\
+	protobuf/cc/src/CarlifeDeviceInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeErrorCodeProto.pb.cc	\
+	protobuf/cc/src/CarlifeFeatureConfigListProto.pb.cc	\
+	protobuf/cc/src/CarlifeFeatureConfigProto.pb.cc	\
+	protobuf/cc/src/CarlifeGearInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeGyroscopeProto.pb.cc	\
+	protobuf/cc/src/CarlifeMediaInfoListProto.pb.cc	\
+	protobuf/cc/src/CarlifeMediaInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeMediaProgressBarProto.pb.cc	\
+	protobuf/cc/src/CarlifeModuleStatusListProto.pb.cc	\
+	protobuf/cc/src/CarlifeModuleStatusProto.pb.cc	\
+	protobuf/cc/src/CarlifeMusicInitProto.pb.cc	\
+	protobuf/cc/src/CarlifeNaviAssitantGuideInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeNaviNextTurnInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeProtocolVersionMatchStatusProto.pb.cc	\
+	protobuf/cc/src/CarlifeProtocolVersionProto.pb.cc	\
+	protobuf/cc/src/CarlifeStatisticsInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeSubscribeMobileCarLifeInfoListProto.pb.cc	\
+	protobuf/cc/src/CarlifeSubscribeMobileCarLifeInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeTouchActionProto.pb.cc	\
+	protobuf/cc/src/CarlifeTouchEventAllDeviceProto.pb.cc	\
+	protobuf/cc/src/CarlifeTouchEventDeviceProto.pb.cc	\
+	protobuf/cc/src/CarlifeTouchEventProto.pb.cc	\
+	protobuf/cc/src/CarlifeTouchFlingProto.pb.cc	\
+	protobuf/cc/src/CarlifeTouchScrollProto.pb.cc	\
+	protobuf/cc/src/CarlifeTouchSinglePointProto.pb.cc	\
+	protobuf/cc/src/CarlifeTTSInitProto.pb.cc	\
+	protobuf/cc/src/CarlifeVehicleInfoListProto.pb.cc	\
+	protobuf/cc/src/CarlifeVehicleInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeVideoEncoderInfoProto.pb.cc	\
+	protobuf/cc/src/CarlifeVideoFrameRateProto.pb.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/stubs/common.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/stubs/once.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/stubs/stringprintf.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/extension_set.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/generated_message_util.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/message_lite.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/repeated_field.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/wire_format_lite.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/io/coded_stream.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/io/zero_copy_stream.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/stubs/strutil.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/stubs/substitute.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/stubs/structurally_valid.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/descriptor.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/descriptor.pb.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/descriptor_database.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/dynamic_message.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/extension_set_heavy.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/generated_message_reflection.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/message.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/reflection_ops.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/service.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/text_format.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/unknown_field_set.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/wire_format.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/io/gzip_stream.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/io/printer.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/io/tokenizer.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/io/zero_copy_stream_impl.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/compiler/importer.cc	\
+	../../../$(TOP)/external/protobuf/src/google/protobuf/compiler/parser.cc
+##############################################################
+#	protobuf/proto/CarlifeAccelerationProto.proto	\
+#	protobuf/proto/CarlifeAuthenRequestProto.proto	\
+#	protobuf/proto/CarlifeAuthenResponseProto.proto	\
+#	protobuf/proto/CarlifeAuthenResultProto.proto	\
+#	protobuf/proto/CarlifeBTHfpConnectionProto.proto	\
+#	protobuf/proto/CarlifeBTHfpIndicationProto.proto	\
+#	protobuf/proto/CarlifeBTHfpRequestProto.proto	\
+#	protobuf/proto/CarlifeBTHfpResponseProto.proto	\
+#	protobuf/proto/CarlifeBTHfpStatusRequestProto.proto	\
+#	protobuf/proto/CarlifeBTHfpStatusResponseProto.proto	\
+#	protobuf/proto/CarlifeBTIdentifyResultIndProto.proto	\
+#	protobuf/proto/CarlifeBTPairInfoProto.proto	\
+#	protobuf/proto/CarlifeBTStartIdentifyReqProto.proto	\
+#	protobuf/proto/CarlifeBTStartPairReqProto.proto	\
+#	protobuf/proto/CarlifeCallRecordsListProto.proto	\
+#	protobuf/proto/CarlifeCallRecordsProto.proto	\
+#	protobuf/proto/CarlifeCarGpsProto.proto	\
+#	protobuf/proto/CarlifeCarHardKeyCodeProto.proto	\
+#	protobuf/proto/CarlifeCarSpeedProto.proto	\
+#	protobuf/proto/CarlifeConnectExceptionProto.proto	\
+#	protobuf/proto/CarlifeContactsListProto.proto	\
+#	protobuf/proto/CarlifeContactsProto.proto	\
+#	protobuf/proto/CarlifeDeviceInfoProto.proto	\
+#	protobuf/proto/CarlifeErrorCodeProto.proto	\
+#	protobuf/proto/CarlifeFeatureConfigListProto.proto	\
+#	protobuf/proto/CarlifeFeatureConfigProto.proto	\
+#	protobuf/proto/CarlifeGearInfoProto.proto	\
+#	protobuf/proto/CarlifeGyroscopeProto.proto	\
+#	protobuf/proto/CarlifeMediaInfoListProto.proto	\
+#	protobuf/proto/CarlifeMediaInfoProto.proto	\
+#	protobuf/proto/CarlifeMediaProgressBarProto.proto	\
+#	protobuf/proto/CarlifeModuleStatusListProto.proto	\
+#	protobuf/proto/CarlifeModuleStatusProto.proto	\
+#	protobuf/proto/CarlifeMusicInitProto.proto	\
+#	protobuf/proto/CarlifeNaviAssitantGuideInfoProto.proto	\
+#	protobuf/proto/CarlifeNaviNextTurnInfoProto.proto	\
+#	protobuf/proto/CarlifeProtocolVersionMatchStatusProto.proto	\
+#	protobuf/proto/CarlifeProtocolVersionProto.proto	\
+#	protobuf/proto/CarlifeStatisticsInfoProto.proto	\
+#	protobuf/proto/CarlifeSubscribeMobileCarLifeInfoListProto.proto	\
+#	protobuf/proto/CarlifeSubscribeMobileCarLifeInfoProto.proto	\
+#	protobuf/proto/CarlifeTouchActionProto.proto	\
+#	protobuf/proto/CarlifeTouchEventAllDeviceProto.proto	\
+#	protobuf/proto/CarlifeTouchEventDeviceProto.proto	\
+#	protobuf/proto/CarlifeTouchEventProto.proto	\
+#	protobuf/proto/CarlifeTouchFlingProto.proto	\
+#	protobuf/proto/CarlifeTouchScrollProto.proto	\
+#	protobuf/proto/CarlifeTouchSinglePointProto.proto	\
+#	protobuf/proto/CarlifeTTSInitProto.proto	\
+#	protobuf/proto/CarlifeVehicleInfoListProto.proto	\
+#	protobuf/proto/CarlifeVehicleInfoProto.proto	\
+#	protobuf/proto/CarlifeVideoEncoderInfoProto.proto	\
+#	protobuf/proto/CarlifeVideoFrameRateProto.proto	\
+	#protobuf/cc/include/google/protobuf/io/code_stream.cc	\
+	#iAP2Components/iAP2AuthAndIdentify.c	\
+#LOCAL_SRC_FILES := $(call all-source-files)  
+#LOCAL_SRC_FILES += $(call all-subdir-files)
+LOCAL_C_ALL_INCLUDES += \
+	$(LOCAL_PATH)/include \
+	$(LOCAL_PATH)/protobuf/cc/include	\
+	$(TOP)/external/stlport/src/ \
+	$(LOCAL_PATH)/protobuf/cc/include/google/protobuf/io	\
+	$(TOP)/external/protobuf/src/ \
+	$(TOP)/external/protobuf/src/google/protobuf/io/ \
+	$(TOP)/external/protobuf/android/ \
+	$(TOP)/system/core/include/
+	
+
+include $(CLEAR_VARS)
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DGOOGLE_PROTOBUF_NO_RTTI
+LOCAL_CFLAGS += $(COMMONFLAGS)
+LOCAL_CFLAGS += -Wno-error=non-virtual-dtor
+LOCAL_CFLAGS += -Wno-error=return-type
+LOCAL_SRC_FILES := $(LOCAL_SRC_ALL_FILES)
+LOCAL_C_INCLUDES := $(LOCAL_C_ALL_INCLUDES)
+
+APP_STL := gnustl_static
+LOCAL_MODULE_TAGS:= optional
+LOCAL_MODULE:= libcarlife
+LOCAL_STATIC_LIBRARIES += libprotobuf liblog
+LOCAL_STATIC_LIBRARIES += libprotoc
+LOCAL_STATIC_LIBRARIES += libz
+LOCAL_LDLIBS += -lprotobuf 
+LOCAL_LDLIBS +=	-lpprotoc
+LOCAL_CPP_EXTENSION +=  .cc
+LOCAL_SDK_VERSION := 8
+LOCAL_NDK_STL_VARIANT := stlport_static
+LOCAL_CPPFLAGS += -frtti
+include $(BUILD_SHARED_LIBRARY)
+##############################################################
+
+##############################################################
+include $(CLEAR_VARS)
+
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DGOOGLE_PROTOBUF_NO_RTTI
+LOCAL_CFLAGS += $(COMMONFLAGS)
+LOCAL_CFLAGS += -Wno-error=non-virtual-dtor
+LOCAL_CFLAGS += -Wno-error=return-type
+
+LOCAL_SRC_FILES := CarLifeJni.cpp
+LOCAL_SRC_FILES += nfMiraAPI.cpp
+
+LOCAL_C_INCLUDES := $(LOCAL_C_ALL_INCLUDES)	
+#					/home/kisen/work/proj/wandboard-4.4.2_1-pre-source/wand-4.4.2_1/frameworks/native/include/ \
+#					/home/kisen/work/proj/wandboard-4.4.2_1-pre-source/wand-4.4.2_1/hardware/libhardware/include/ \
+#					/home/kisen/work/proj/wandboard-4.4.2_1-pre-source/wand-4.4.2_1/frameworks/native/opengl/include/ \
+#					/home/kisen/work/proj/wandboard-4.4.2_1-pre-source/wand-4.4.2_1/frameworks/av/include/
+
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE := libcarlifeJni
+LOCAL_CFLAGS += -nostartfiles
+LOCAL_LDLIBS := \
+	-lm \
+	-lpthread
+LOCAL_LDLIBS += -ldl
+LOCAL_LDFLAGS += -ldl -rdynamic 
+LOCAL_STATIC_LIBRARIES += libtommath
+LOCAL_STATIC_LIBRARIES += libz
+LOCAL_SHARED_LIBRARIES += liblog libcarlife
+LOCAL_SDK_VERSION := 8
+LOCAL_NDK_STL_VARIANT := stlport_static
+LOCAL_NDK_STL_VARIANT := stlport_static
+include $(BUILD_SHARED_LIBRARY)
+##############################################################
+
+##############################################################
+include $(CLEAR_VARS)
+
+LOCAL_ARM_MODE := arm
+LOCAL_CFLAGS := -DGOOGLE_PROTOBUF_NO_RTTI
+LOCAL_CFLAGS += $(COMMONFLAGS)
+LOCAL_CFLAGS += -Wno-error=non-virtual-dtor
+LOCAL_CFLAGS += -Wno-error=return-type
+
+LOCAL_SRC_FILES := CarLifebin.cpp
+
+LOCAL_C_INCLUDES := $(LOCAL_C_ALL_INCLUDES)
+
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE := carlifebin
+LOCAL_CFLAGS += -nostartfiles
+LOCAL_LDLIBS := \
+	-lm \
+	-lpthread
+LOCAL_LDLIBS += -ldl
+LOCAL_LDFLAGS += -ldl -rdynamic 
+LOCAL_STATIC_LIBRARIES += libtommath
+LOCAL_STATIC_LIBRARIES += libz
+LOCAL_SHARED_LIBRARIES += liblog libcarlife
+LOCAL_SDK_VERSION := 8
+LOCAL_NDK_STL_VARIANT := stlport_static
+include $(BUILD_EXECUTABLE)
+##############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

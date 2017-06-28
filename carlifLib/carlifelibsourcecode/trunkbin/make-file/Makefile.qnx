@@ -1,0 +1,84 @@
+#Author:
+#	Liu CaiQuan
+#Date:
+#	7th Semptember 2015
+#CarLife Protocol version:
+#	V0.15
+#
+#rule for QNX
+#                 Copyright (C) Under BaiDu, Inc.
+
+#TOPDIR:=~/EddyWorkSpace/CarLifeLibSourceCode/trunk
+TOPDIR:=$(shell pwd)
+PBDIR:=/home/user/EddyWorkSpace
+export PBDIR TOPDIR
+
+CROSS_COMPILE=/opt/qnx650/host/linux/x86/usr/bin/ntoarmv7-
+LD=$(CROSS_COMPILE)ld
+CC=$(CROSS_COMPILE)g++
+
+CP=cp
+
+export LD CC 
+
+CFLAGS:=-g -Wall -W -fPIC
+CFLAGS+=-I $(TOPDIR)/protobuf/cc/include
+CFLAGS+=-I $(TOPDIR)/include
+CFLAGS+=-I $(PBDIR)/protobuf-2.5.0/src/google/protobuf/io
+CFLAGS+=-I $(PBDIR)/protobuf-2.5.0/src/goolge/protobuf/stub
+CFLAGS+=-I $(PBDIR)/protobuf-2.5.0/src
+
+LFLAGS:=
+LFLAGS+=-L$(PBDIR)/protobuf-2.5.0/nto-arm-le-v7-g/src/.libs -lprotobuf
+LFLAGS+=-L/opt/qnx650/target/qnx6/armle-v7/lib -lsocket
+
+#LIBS:=
+#LIBS+=-lprotobuf
+#LIBS+=-lsocket
+
+export CFLAGS LFLAGS 
+
+
+OBJDIR=obj
+
+#obj-y+=CarLifeLibTest.o
+obj-y+=core/
+obj-y+=libwrapper/
+obj-y+=modules/
+obj-y+=protobuf/
+obj-y+=utility/
+
+TARGET-LIB=libcarlifevehicle.so
+TARGET-APP=libtest
+
+all: carlifelib libtest
+
+carlifelib: 
+	make -C ./ -f $(TOPDIR)/Makefile.build
+	$(CC) -shared -o $(TARGET-LIB) built-in.o
+	$(CP) $(TARGET-LIB) $(OBJDIR)	
+
+libtest:CarLifeLibTest.cpp
+	$(CC) -o $(TARGET-APP) $< -Iinclude -L./ -lcarlifevehicle $(LFLAGS)
+	$(CP) $(TARGET-APP) $(OBJDIR)
+
+protoBuf:
+	rm -f ./protobuf/pbGen/*
+	protoc --proto_path=./protobuf/proto/ --cpp_out=./protobuf/pbGen ./protobuf/proto/*.proto
+	rm -f ./protobuf/cc/src/*.cc
+	rm -f ./protobuf/cc/include/*.h
+	mv ./protobuf/pbGen/*.cc ./protobuf/cc/src/
+	mv ./protobuf/pbGen/*.h ./protobuf/cc/include/
+
+clean:
+	rm -f $(shell find -name "*.o")
+	rm -f $(TARGET-LIB)
+	rm -f $(TARGET-APP)
+	rm -f $(OBJDIR)/*
+
+distclean:
+	rm -f $(shell find -name "*.o")
+	rm -f $(shell find -name "*.d")
+	rm -f $(TARGET-LIB)
+	rm -f $(TARGET-APP)
+	rm -f $(OBJDIR)/*

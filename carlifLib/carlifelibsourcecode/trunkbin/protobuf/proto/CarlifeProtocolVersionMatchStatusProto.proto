@@ -1,0 +1,5 @@
+package com.baidu.carlife.protobuf;
+message CarlifeProtocolVersionMatchStatus
+{
+	required int32 matchStatus = 1;
+}

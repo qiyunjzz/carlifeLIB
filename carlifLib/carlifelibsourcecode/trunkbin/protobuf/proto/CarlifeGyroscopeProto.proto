@@ -1,0 +1,8 @@
+package com.baidu.carlife.protobuf;
+message CarlifeGyroscope
+{
+	required int32 samplesCount = 1;
+	required int32 xAxisGyroSum = 2;
+	required int32 yAxisGyroSum = 3;
+	required int32 zAxisGyroSum = 4;
+}

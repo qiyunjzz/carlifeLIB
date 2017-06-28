@@ -1,0 +1,5 @@
+package com.baidu.carlife.protobuf;
+message CarlifeAuthenResult
+{
+    required bool authenResult = 1;
+}

@@ -1,0 +1,6 @@
+package com.baidu.carlife.protobuf;
+message CarlifeProtocolVersion
+{
+	required int32 majorVersion = 1;
+	required int32 minorVersion = 2;
+}

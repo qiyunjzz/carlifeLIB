@@ -1,0 +1,8 @@
+package com.baidu.carlife.protobuf;
+message CarlifeAcceleration
+{
+	required int32 samplesCount = 1;
+	required int32 xAxisAcceSum = 2;
+	required int32 yAxisAcceSum = 3;
+	required int32 zAxisAcceSum = 4;
+}

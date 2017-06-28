@@ -1,0 +1,10 @@
+#ifndef CARLIFE_LIB_TEST_H
+#define CARLIFE_LIB_TEST_H
+#include<pthread.h>
+#include<unistd.h>
+#include<jni.h>
+
+int nfcarlifetest();
+void stopcarlife();
+
+#endif

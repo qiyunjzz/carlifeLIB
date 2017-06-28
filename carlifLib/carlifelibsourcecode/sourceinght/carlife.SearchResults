@@ -1,0 +1,3 @@
+---- CSocketConnector( Matches (2 in 2 files) ----
+CSocketConnector.cc (utility):CSocketConnector::~CSocketConnector()
+CSocketConnector.h (include):	~CSocketConnector();
